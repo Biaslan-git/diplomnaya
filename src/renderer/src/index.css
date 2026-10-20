@@ -12,6 +12,7 @@
   * { scrollbar-width: thin; scrollbar-color: #d8cdbb transparent; }
   *::-webkit-scrollbar { width: 10px; height: 10px; }
   *::-webkit-scrollbar-thumb { @apply rounded-full bg-cream-300; border: 2px solid transparent; background-clip: content-box; }
+  td button { text-align: left; }
   input[type='number']::-webkit-inner-spin-button { opacity: .4; }
 }
 

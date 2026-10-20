@@ -31,7 +31,7 @@ export function Button({
       {...rest}
       disabled={rest.disabled || loading}
       className={cx(
-        'inline-flex items-center justify-center gap-2 rounded-lg font-medium outline-none transition focus-visible:ring-2 disabled:cursor-not-allowed',
+        'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg font-medium outline-none transition focus-visible:ring-2 disabled:cursor-not-allowed',
         sz, VARIANT[variant], className
       )}
     >

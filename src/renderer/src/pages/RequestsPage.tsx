@@ -26,26 +26,25 @@ export default function RequestsPage() {
 
   const columns = useMemo<ColumnDef<RequestRow, any>[]>(
     () => [
-      { id: 'id', header: '№', accessorFn: (r) => r.id, cell: (c) => <span className="text-ink-500">{c.getValue()}</span> },
       {
         id: 'material', header: 'Материал', accessorFn: (r) => r.materialName,
         cell: ({ row: { original: r } }) => (
           <div>
-            <button className="font-medium text-ink-900 hover:text-amber-700 hover:underline" onClick={() => navigate(`/materials/${r.materialId}`)}>{r.materialName}</button>
+            <button className="min-w-[150px] text-left font-medium text-ink-900 hover:text-amber-700 hover:underline" onClick={() => navigate(`/materials/${r.materialId}`)}>{r.materialName}</button>
             {r.comment && <div className="line-clamp-1 max-w-[320px] text-[12px] text-ink-500">{r.comment}</div>}
           </div>
         )
       },
       { id: 'qty', header: 'Количество', accessorFn: (r) => r.quantity, meta: { align: 'right' }, cell: ({ row: { original: r } }) => <span className="font-medium">{fmtNum(r.quantity)} {r.unit}</span> },
       {
-        id: 'desired', header: 'Желаемая дата', accessorFn: (r) => r.desiredDate,
+        id: 'desired', header: 'Нужна к', accessorFn: (r) => r.desiredDate,
         cell: ({ row: { original: r } }) => <span className={(r.status === 'new' || r.status === 'in_progress') && r.desiredDate < todayStr() ? 'font-semibold text-red-600' : ''}>{fmtDate(r.desiredDate)}</span>
       },
       { id: 'status', header: 'Статус', accessorFn: (r) => REQUEST_STATUS_LABEL[r.status], cell: ({ row: { original: r } }) => <RequestStatusBadge status={r.status} /> },
       { id: 'type', header: 'Создание', accessorFn: (r) => (r.isAuto ? 1 : 0), cell: ({ row: { original: r } }) => (r.isAuto ? <Badge tone="violet">Автоматически</Badge> : <span className="text-ink-500">Вручную</span>) },
       {
         id: 'order', header: 'Заказ', accessorFn: (r) => r.orderNumber ?? '',
-        cell: ({ row: { original: r } }) => r.orderId ? <button className="font-medium text-amber-800 hover:underline" onClick={() => navigate(`/orders/${r.orderId}`)}>{r.orderNumber}</button> : <span className="text-ink-400">—</span>
+        cell: ({ row: { original: r } }) => r.orderId ? <button className="whitespace-nowrap font-medium text-amber-800 hover:underline" onClick={() => navigate(`/orders/${r.orderId}`)}>{r.orderNumber}</button> : <span className="text-ink-400">—</span>
       },
       { id: 'created', header: 'Создана', accessorFn: (r) => r.createdAt, cell: (c) => <span className="text-ink-600">{fmtDate(c.getValue())}</span> },
       {
