@@ -22,4 +22,5 @@ nsis:
   perMachine: false
   createDesktopShortcut: true
   language: "1049"
-npmRebuild: true
+# better-sqlite3 поставляется с готовыми бинарниками (N-API), пересборка не нужна
+npmRebuild: false

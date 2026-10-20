@@ -54,6 +54,7 @@ export function getDashboard(): DashboardData {
     activeOrders: all.filter((o) => o.status === 'sent' || o.status === 'partial').length,
     overdueOrders: overdue.length,
     lowStock: lowMaterials.length,
+    newRequests: db.get<{ c: number }>(sql`select count(*) as c from purchase_requests where status = 'new'`)?.c ?? 0,
     monthly: months.map((m) => ({ month: m, label: monthLabel(m), total: byMonth.get(m) ?? 0 })),
     topSuppliers: top,
     attention

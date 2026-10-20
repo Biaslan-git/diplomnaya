@@ -14,7 +14,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['"Segoe UI Variable Text"', '"Segoe UI"', 'Inter', 'system-ui', '-apple-system', 'Roboto', 'sans-serif'],
-        display: ['"Segoe UI Variable Display"', '"Segoe UI"', 'Georgia', 'serif']
+        display: ['Georgia', 'Cambria', '"Times New Roman"', 'serif']
       },
       boxShadow: {
         card: '0 1px 2px rgba(60,40,20,.06), 0 1px 3px rgba(60,40,20,.05)',

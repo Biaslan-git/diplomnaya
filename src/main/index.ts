@@ -7,6 +7,9 @@ import { ensureDefaultUser, authState } from './services/auth'
 import { ensureAutoRequestsForAll } from './services/requests'
 import { registerIpc } from './ipc'
 
+// русская локаль Chromium: даты в полях ввода — ДД.ММ.ГГГГ
+app.commandLine.appendSwitch('lang', 'ru')
+
 function migrationsFolder(): string {
   return app.isPackaged ? join(process.resourcesPath, 'drizzle') : join(app.getAppPath(), 'drizzle')
 }

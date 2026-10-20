@@ -142,7 +142,7 @@ export function seedDemo(db: DbLike, today = todayStr()): void {
   }
 
   // ---------- имитация работы предприятия за последние ~11 месяцев ----------
-  const HISTORY_DAYS = 290
+  const HISTORY_DAYS = 330
   const start = addDays(today, -HISTORY_DAYS)
   const stock = new Map<string, number>()
   const openUntil = new Map<string, string>() // материал «в пути» до этой даты
@@ -150,7 +150,7 @@ export function seedDemo(db: DbLike, today = todayStr()): void {
   const writeoffs: { mat: string; date: string; qty: number; comment: string }[] = []
   const acc = new Map<string, number>()
   for (const m of MATERIALS) {
-    stock.set(m.key, round3(m.min * between(2.2, 2.8)))
+    stock.set(m.key, Math.max(m.step, Math.round((m.min * between(1.5, 3.6)) / m.step) * m.step))
     acc.set(m.key, 0)
   }
   const initial = new Map(stock)
@@ -201,7 +201,7 @@ export function seedDemo(db: DbLike, today = todayStr()): void {
         const sup = SUPPLIERS.find((s) => s.key === sk)!
         const sentDay = addDays(day, rnd() < 0.5 ? 0 : 1)
         const items = mats.map((m) => {
-          const raw = (m.cons * between(65, 85))
+          const raw = (m.cons * between(80, 100))
           const qty = Math.max(m.step, Math.round(raw / m.step) * m.step)
           return { mat: m, qty, price: priceOf.get(`${sk}:${m.key}`)!.price }
         })
@@ -260,7 +260,7 @@ export function seedDemo(db: DbLike, today = todayStr()): void {
   const forced = ['hopA', 'cap', 'cip'].filter((k) => !((openUntil.get(k) ?? '') > today)).slice(0, 3)
   for (const k of forced) {
     const m = matByKey.get(k)!
-    const target = round3(m.min * between(0.45, 0.8))
+    const target = Math.round((m.min * between(0.45, 0.8)) / m.step) * m.step
     const q = round3(stock.get(k)! - target)
     if (q > 0) {
       writeoffs.push({ mat: k, date: today, qty: q, comment: 'Срочная партия на производство' })

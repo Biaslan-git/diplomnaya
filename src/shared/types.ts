@@ -183,6 +183,7 @@ export interface DashboardData {
   activeOrders: number
   overdueOrders: number
   lowStock: number
+  newRequests: number
   monthly: { month: string; label: string; total: number }[]
   topSuppliers: { id: number; name: string; rating: number }[]
   attention: AttentionItem[]

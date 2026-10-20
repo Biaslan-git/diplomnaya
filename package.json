@@ -13,9 +13,6 @@
     "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
     "db:generate": "drizzle-kit generate",
     "test": "tsx --tsconfig tsconfig.node.json scripts/selftest.ts",
-    "postinstall": "electron-builder install-app-deps",
-    "rebuild:node": "npm rebuild better-sqlite3",
-    "rebuild:electron": "electron-builder install-app-deps",
     "dist": "npm run build && electron-builder --win",
     "dist:dir": "npm run build && electron-builder --dir"
   },
