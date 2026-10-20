@@ -1,0 +1,25 @@
+appId: ru.karachaevsky.purchasing
+productName: Закупки — Карачаевский пивзавод
+directories:
+  buildResources: build
+  output: release
+files:
+  - out/**
+  - package.json
+asarUnpack:
+  - node_modules/better-sqlite3/**
+extraResources:
+  - from: drizzle
+    to: drizzle
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  artifactName: ${name}-setup-${version}.${ext}
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  perMachine: false
+  createDesktopShortcut: true
+  language: "1049"
+npmRebuild: true
